@@ -1,21 +1,15 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { toast } from 'react-toastify';
-const getLocalStorage = () => {
-	let listArray = localStorage.getItem('listArray');
-	if (listArray) {
-		listArray = JSON.parse(localStorage.getItem('listArray'));
-	} else {
-		listArray = [];
-	}
-	return listArray;
-};
+
+const defaultValue = JSON.parse(localStorage.getItem('listArray') || '[]');
+
 const setLocalStorage = (items) => {
 	localStorage.setItem('listArray', JSON.stringify(items));
 };
 const ListLogics = () => {
 	const [inputDataState, setInputDataState] = useState('');
-	const [listItemsState, setListItemsState] = useState(getLocalStorage());
+	const [listItemsState, setListItemsState] = useState(defaultValue);
 
 	const handleAddingItem = (e) => {
 		e.preventDefault();
